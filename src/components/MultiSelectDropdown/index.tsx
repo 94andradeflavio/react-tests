@@ -18,6 +18,19 @@ export const MultiSelectDropdown = ({ options }: IProps) => {
   const [selectedOptions, setSelectedOptions] = useState<Client[]>([]);
   const [activeDropdown, setActiveDropdown] = useState<boolean>(false);
 
+  const handleCloseDropdown = (event: MouseEvent) => {
+    const target = event.target as HTMLElement;
+    const container = document.querySelector("#container");
+    if (container && !container.contains(target)) {
+      setActiveDropdown(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleCloseDropdown);
+    return () => document.removeEventListener("click", handleCloseDropdown);
+  }, []);
+
   const handleOption = (value: Client) => {
     if (selectedOptions.includes(value)) {
       const options = selectedOptions.filter((option) => option !== value);
@@ -36,7 +49,7 @@ export const MultiSelectDropdown = ({ options }: IProps) => {
   }, [searchText]);
 
   return (
-    <S.Container>
+    <S.Container id="container">
       <S.InputSearch
         type="text"
         placeholder="Pesquisar"
