@@ -1,17 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { MultiSelectDropdown } from "./components/MultiSelectDropdown";
+import { mockClients } from "./mocks/clients";
+import * as S from "./styles";
 
 function App() {
-
   return (
     <>
-      <div>
-        Olá mundo
-      </div>
+      <S.Form>
+        <S.Container>
+          <S.Label>Empresas</S.Label>
+          <MultiSelectDropdown options={mockClients} />
+        </S.Container>
+      </S.Form>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
